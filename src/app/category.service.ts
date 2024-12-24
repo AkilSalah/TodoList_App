@@ -12,14 +12,16 @@ export class CategoryService {
     return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
   }
 
-  saveCategorie(categories : any[]) : void{
+  saveCategories(categories : any[]) : void{
     localStorage.setItem(this.storageKey,JSON.stringify(categories));
   }
 
   addCategory(category : any) :void{
     const categories = this.getCategories();
+    category.id = Date.now();
+    console.log(category.id);
     categories.push(category);
-    this.saveCategorie(categories);
+    this.saveCategories(categories);
   }
   updateCategory(updatedCategory : any) : void{
     const categories = this.getCategories().map(category =>{
@@ -29,12 +31,12 @@ export class CategoryService {
        return category
       }
     });
-    this.saveCategorie(categories);
+    this.saveCategories(categories);
   }
 
   deleteCategory(id:number) : void{
     const categories = this.getCategories().filter(category => category.id !== id);
-    this.saveCategorie(categories);
+    this.saveCategories(categories);
     
   }
 }

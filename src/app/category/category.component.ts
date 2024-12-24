@@ -9,6 +9,7 @@ import { CategoryService } from '../category.service';
 export class CategoryComponent {
   categories : any[] = [];
   category: any = { id: null, name: '' };
+
   constructor(private categoryService : CategoryService){}
 
   ngOnInit() {
@@ -20,6 +21,9 @@ export class CategoryComponent {
   }
 
   saveCategory(){
+    if (!this.category.name.trim()) {
+      return; 
+    }
     if(this.category.id){
       this.categoryService.updateCategory(this.category);
     }else{
@@ -30,8 +34,10 @@ export class CategoryComponent {
   }
 
   deleteCategory(id : number){
-    this.categoryService.deleteCategory(id);
-    this.loadCategories();
+    if (confirm('Are you sure you want to delete this category?')) {
+      this.categoryService.deleteCategory(id);
+      this.loadCategories();
+    }
   }
 
   editCategory(category: any) {
