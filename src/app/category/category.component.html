@@ -2,14 +2,13 @@
     <div class="container mx-auto py-5 h-full">
       <div class="flex justify-center items-center h-full">
         <div class="w-full max-w-5xl">
-            <div class="text-center -mt-64 ">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
-                  alt="Check" width="60" class="mx-auto">
-                <h2 class="my-4 text-xl font-bold">Categories</h2>
-            </div>
-          <div class="bg-gray-700  rounded-lg shadow-lg">
-            <div class="p-4 text-white">
+           
+          <div class="bg-gray-800  rounded-lg shadow-lg">
+            <div class="p-4 text-white -mt-36">
+                <div class="flex justify-between flex-wrap">
+                 <div class="text-center flex gap-11 ">
+                    <h2 class="mb-4 text-3xl font-extrabold text-white dark:text-white md:text-5xl lg:text-3xl">Categories</h2>
+                </div>
                 <form class="flex items-center justify-center gap-4 mb-4 pb-2">
                     <div class="">
                       <div class="relative">
@@ -20,28 +19,31 @@
                     <div class="">
                       <button type="submit" class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add</button>
                     </div>
-                  </form>
-                  
-              <table class="table-auto w-full text-white">
-                <thead class="border-b border-gray-600">
-                  <tr>
-                    <th class="text-left py-2 px-3">Category</th>
-                    <th class="text-left py-2 px-3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="border-b border-gray-700">
-                    <td class="py-3 px-3 align-middle">Make payment to Bluedart</td>
-                    <td class="py-3 px-3 flex items-center space-x-3">
-                      <a href="#" title="Update" class="text-yellow-500"><i class="fas fa-check">Update</i></a>
-                      <a href="#" title="Remove" class="text-red-500"><i class="fas fa-trash-alt">Delete</i></a>
-                      <a routerLink="/task" title="Add" class="text-green-500"><i class="fas fa-trash-alt"> Tasks</i></a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                  </form>   
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="table-auto w-full text-white">
+                      <thead class="border-b border-gray-600">
+                        <tr>
+                          <th class="text-left py-2 px-3">Category</th>
+                          <th class="text-left py-2 px-3">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="border-b border-gray-700">
+                          <td class="py-3 px-3 align-middle">Make payment to Bluedart</td>
+                          <td class="py-3 px-3 flex flex-wrap items-center space-x-3">
+                            <a href="#" title="Update" class="text-yellow-500"><i class="fas fa-check"></i> Update</a>
+                            <a href="#" title="Remove" class="text-red-500"><i class="fas fa-trash-alt"></i> Delete</a>
+                            <a routerLink="/task" title="Add" class="text-green-500"><i class="fas fa-plus-circle"></i> Tasks</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>              
+                </div>
             </div>
-          </div>
   
         </div>
       </div>
