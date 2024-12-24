@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 import { CategoryComponent } from './category/category.component';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
-    CategoryComponent
+    CategoryComponent,
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
