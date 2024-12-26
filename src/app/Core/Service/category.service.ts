@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Category } from '../Models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,22 +9,22 @@ export class CategoryService {
 
   constructor() { }
 
-  getCategories() : any[] {
+  getCategories() : Category[] {
     return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
   }
 
-  saveCategories(categories : any[]) : void{
+  saveCategories(categories : Category[]) : void{
     localStorage.setItem(this.storageKey,JSON.stringify(categories));
   }
 
-  addCategory(category : any) :void{
+  addCategory(category : Category) :void{
     const categories = this.getCategories();
     category.id = Date.now();
     console.log(category.id);
     categories.push(category);
     this.saveCategories(categories);
   }
-  updateCategory(updatedCategory : any) : void{
+  updateCategory(updatedCategory : Category) : void{
     const categories = this.getCategories().map(category =>{
       if(category.id === updatedCategory.id){
       return updatedCategory

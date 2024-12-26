@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CategoryService } from '../../Core/Service/category.service';
+import { Category } from '../../Core/Models/category.model';
 
 @Component({
   selector: 'app-category',
@@ -7,8 +8,9 @@ import { CategoryService } from '../../Core/Service/category.service';
   styleUrl: './category.component.css'
 })
 export class CategoryComponent {
-  categories : any[] = [];
-  category: any = { id: null, name: '' };
+  
+  categories : Category[] = [];
+  category: Category = { id: null, name: '' }; 
 
   constructor(private categoryService : CategoryService){}
 
@@ -21,7 +23,8 @@ export class CategoryComponent {
   }
 
   saveCategory(){
-    if (!this.category.name.trim()) {
+    if(!this.category.name || !this.category.name.trim()) {
+      console.error("Le nom de la catégorie est vide ou invalide.");
       return; 
     }
     if(this.category.id){
