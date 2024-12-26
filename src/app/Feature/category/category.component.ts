@@ -10,8 +10,8 @@ import { Category } from '../../Core/Models/category.model';
 export class CategoryComponent {
   
   categories : Category[] = [];
-  category: Category = { id: null, name: '' }; 
-
+  category: Category = {id:0 , name: '' };
+  
   constructor(private categoryService : CategoryService){}
 
   ngOnInit() {
@@ -36,11 +36,13 @@ export class CategoryComponent {
     this.loadCategories();
   }
 
-  deleteCategory(id : number){
-    if (confirm('Are you sure you want to delete this category?')) {
-      this.categoryService.deleteCategory(id);
-      this.loadCategories();
-    }
+  deleteCategory(id : number | undefined){
+    if (id) { 
+      if (confirm('Are you sure you want to delete this category?')) {
+          this.categoryService.deleteCategory(id);
+          this.loadCategories();
+      }
+  }
   }
 
   editCategory(category: any) {
@@ -48,7 +50,7 @@ export class CategoryComponent {
   }
 
   resetForm() {
-    this.category = { id: null, name: '' };
+    this.category = { id: 0, name: '' };
   }
 
 
