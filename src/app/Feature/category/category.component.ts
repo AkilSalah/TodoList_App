@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CategoryService } from '../category.service';
+import { CategoryService } from '../../Core/Service/category.service';
 
 @Component({
   selector: 'app-category',
