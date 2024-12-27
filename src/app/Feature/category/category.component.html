@@ -1,52 +1,91 @@
-<section class="h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-500">
-    <div class="container mx-auto py-5 h-full">
-      <div class="flex justify-center items-center h-full">
-        <div class="w-full max-w-5xl">
-           
-          <div class="bg-gray-800  rounded-lg shadow-lg">
-            <div class="p-4 text-white -mt-36">
-                <div class="flex justify-between flex-wrap">
-                 <div class="text-center flex gap-11 ">
-                    <h2 class="mb-4 text-3xl font-extrabold text-white dark:text-white md:text-5xl lg:text-3xl">Categories</h2>
+<section
+  class="h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-500"
+>
+  <div class="container mx-auto py-5 h-full">
+    <div class="flex justify-center items-center h-full">
+      <div class="w-full max-w-2xl">
+        <div class="bg-gray-800 rounded-lg shadow-lg">
+          <div class="p-4 text-white -mt-36">
+            <div class="flex justify-between flex-wrap">
+              <div class="text-center flex gap-11">
+                <h2
+                  class="mb-4 text-3xl font-extrabold text-white dark:text-white md:text-5xl lg:text-3xl"
+                >
+                  Categories
+                </h2>
+              </div>
+              <form
+                (ngSubmit)="saveCategory()"
+                class="flex items-center justify-center gap-4 mb-4 pb-2"
+              >
+                <div class="">
+                  <div class="relative">
+                    <input
+                      [(ngModel)]="category.name"
+                      type="text"
+                      name="categoryName"
+                      id="form1"
+                      class="form-input block text-black px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Entre Category"
+                    />
+                  </div>
                 </div>
-                <form (ngSubmit)="saveCategory()" class="flex items-center justify-center gap-4 mb-4 pb-2">
-                    <div class="">
-                      <div class="relative">
-                        <input [(ngModel)]="category.name"
-                        type="text" name="categoryName" id="form1" class="form-input block text-black px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2  focus:ring-blue-500" placeholder="Entre Category" />
-                      </div>
-                    </div>
-                    <div class="">
-                      <button type="submit"  class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">{{ category.id ? 'Update' : 'Add' }}
-                    </button>
-                    </div>
-                  </form>   
+                <div class="">
+                  <button
+                    type="submit"
+                    class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                  >
+                    {{ category.id ? "Update" : "Add" }}
+                  </button>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="table-auto w-full text-white">
-                      <thead class="border-b border-gray-600">
-                        <tr>
-                          <th class="text-left py-2 px-3">Category</th>
-                          <th class="text-left py-2 px-3">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="border-b border-gray-700" *ngFor="let category of categories">
-                          <td class="py-3 px-3 align-middle">{{category.name}}</td>
-                          <td class="py-3 px-3 flex flex-wrap items-center space-x-3">
-                            <a (click)="editCategory(category)" title="Update" class="text-yellow-500"><i class="fas fa-check"></i> Update</a>
-                            <a (click)="deleteCategory(category.id)" title="Remove" class="text-red-500"><i class="fas fa-trash-alt"></i> Delete</a>
-                            <a routerLink="/task" [queryParams]="{categoryId : category.id}" title="Add" class="text-green-500"><i class="fas fa-plus-circle"></i> Tasks</a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>              
-                </div>
+              </form>
             </div>
-  
+            <div class="overflow-x-auto">
+              <table class="table-auto w-full text-white">
+                <thead class="border-b border-gray-600">
+                  <tr class="flex justify-between w-[90%]">
+                    <th class="py-2 px-3">
+                      Category
+                    </th>
+                    <th class="py-2 px-12">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    class="border-b flex justify-between border-gray-700"
+                    *ngFor="let category of categories"
+                  >
+                    <td class="py-3 px-3 align-middle">{{ category.name }}</td>
+                    <td class="py-3 px-3 flex flex-wrap items-center space-x-3">
+                      <a
+                        (click)="editCategory(category)"
+                        title="Update"
+                        class="text-yellow-500"
+                        ><i class="fas fa-check"></i> Update</a
+                      >
+                      <a
+                        (click)="deleteCategory(category.id)"
+                        title="Remove"
+                        class="text-red-500"
+                        ><i class="fas fa-trash-alt"></i> Delete</a
+                      >
+                      <a
+                        routerLink="/task"
+                        [queryParams]="{ categoryId: category.id }"
+                        title="Add"
+                        class="text-green-500"
+                        ><i class="fas fa-plus-circle"></i> Tasks</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

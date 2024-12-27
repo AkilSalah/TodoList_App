@@ -5,9 +5,9 @@ export enum Priority {
 }
 
 export enum Status {
-    COMPLETED = 'TERMINÉ',
-    IN_PROGRESS = 'EN COURS',
-    NOT_STARTED = 'PAS COMMENCÉ'
+    COMPLETED = 'Done',
+    IN_PROGRESS = 'Doing',
+    NOT_STARTED = 'ToDo'
 }
 
 export class Task {

@@ -13,6 +13,7 @@ export class TaskComponent {
   task: Task = {
     id: 0,
     title: '',
+    description : '',
     dueDate: new Date(),
     priority: Priority.MEDIUM,
     status: Status.NOT_STARTED
@@ -21,8 +22,12 @@ export class TaskComponent {
   constructor(private taskService : TaskService,private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.loadTasks();
-  }
+    const categoryId = Number(this.route.snapshot.queryParams['categoryId']);
+    if (categoryId) {
+      this.task.categoryId = categoryId;
+    }
+    this.loadTasks(); 
+   }
 
   loadTasks() {
     this.tasks = this.taskService.getTasks();
@@ -47,6 +52,10 @@ export class TaskComponent {
       this.taskService.deleteTask(id);
       this.loadTasks();
     }
+  }
+
+  editTask(task :any ) {
+    this.task = { ...task }
   }
 
   resetForm() {
