@@ -18,19 +18,30 @@ export class TaskComponent {
     priority: Priority.MEDIUM,
     status: Status.NOT_STARTED
   };  
+
+  categoryId ?:number;
   
   constructor(private taskService : TaskService,private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    const categoryId = Number(this.route.snapshot.queryParams['categoryId']);
-    if (categoryId) {
-      this.task.categoryId = categoryId;
-    }
-    this.loadTasks(); 
-   }
+    // Récupérer le categoryId de l'URL et charger les tâches appropriées
+    this.route.queryParams.subscribe(params => {
+      if (params['categoryId']) {
+        this.categoryId = Number(params['categoryId']);
+        this.task.categoryId = this.categoryId;
+        this.loadTasks();
+      }
+    });
+  }
 
   loadTasks() {
-    this.tasks = this.taskService.getTasks();
+    if (this.categoryId) {
+      // Si on a un categoryId, on charge uniquement les tâches de cette catégorie
+      this.tasks = this.taskService.getTaskByCategories(this.categoryId);
+    } else {
+      // Sinon on charge toutes les tâches
+      this.tasks = this.taskService.getTasks();
+    }
   }
   loadTasksByCategory(categoryId : number) {
     this.tasks = this.taskService.getTasks().filter(t => t.categoryId === categoryId);
@@ -48,7 +59,7 @@ export class TaskComponent {
 
   deleteTask(id : number) : void{
 
-    if (confirm('Are you sure you want to delete this category?')) {
+    if (confirm('Are you sure you want to delete this task?')) {
       this.taskService.deleteTask(id);
       this.loadTasks();
     }
@@ -64,6 +75,7 @@ export class TaskComponent {
       id: 0,
       title: '',
       dueDate: new Date(),
+      description: '',
       priority: Priority.MEDIUM,
       status: Status.NOT_STARTED,
       categoryId : currentCategoryId

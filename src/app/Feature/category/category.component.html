@@ -1,11 +1,9 @@
-<section
-  class="h-screen bg-gradient-to-b from-blue-900 via-blue-800 to-blue-500"
->
+<section class=" bg-gradient-to-b from-blue-900 via-blue-800 to-blue-500  min-h-[88vh]">
   <div class="container mx-auto py-5 h-full">
     <div class="flex justify-center items-center h-full">
       <div class="w-full max-w-2xl">
         <div class="bg-gray-800 rounded-lg shadow-lg">
-          <div class="p-4 text-white -mt-36">
+          <div class="p-4 text-white ">
             <div class="flex justify-between flex-wrap">
               <div class="text-center flex gap-11">
                 <h2
@@ -40,7 +38,7 @@
                 </div>
               </form>
             </div>
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto max-h-[70vh]">
               <table class="table-auto w-full text-white">
                 <thead class="border-b border-gray-600">
                   <tr class="flex justify-between w-[90%]">
@@ -58,7 +56,7 @@
                     *ngFor="let category of categories"
                   >
                     <td class="py-3 px-3 align-middle">{{ category.name }}</td>
-                    <td class="py-3 px-3 flex flex-wrap items-center space-x-3">
+                    <td class="py-3 cursor-pointer px-3 flex flex-wrap items-center space-x-3">
                       <a
                         (click)="editCategory(category)"
                         title="Update"

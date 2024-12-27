@@ -7,7 +7,7 @@ import { Task } from '../Models/task.model';
 export class TaskService {
   private storageKey = "task"
   constructor() { }
-
+  
   getTasks() : Task[]{
    return JSON.parse(localStorage.getItem(this.storageKey )|| '[]');
   }
