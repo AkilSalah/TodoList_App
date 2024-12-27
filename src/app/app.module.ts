@@ -7,7 +7,7 @@ import { TaskComponent } from './Feature/task/task.component';
 import { CategoryComponent } from './Feature/category/category.component';
 import { HomeComponent } from './Feature/home/home.component';
 import { NavbarComponent } from './Feature/navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +15,12 @@ import { FormsModule } from '@angular/forms';
     TaskComponent,
     CategoryComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

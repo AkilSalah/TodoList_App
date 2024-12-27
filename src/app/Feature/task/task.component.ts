@@ -1,75 +1,94 @@
-import { Component } from '@angular/core';
-import { TaskService } from '../../Core/Service/task.service';
-import { Priority, Status, Task } from '../../Core/Models/task.model';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TaskService } from '../../Core/Service/task.service';
+import { SearchService } from '../../Core/Service/search.service';
+import { Priority, Status, Task } from '../../Core/Models/task.model';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrl: './task.component.css'
+  styleUrls: ['./task.component.css']
 })
-export class TaskComponent {
-  tasks : Task[] = [];
+export class TaskComponent implements OnInit {
+  searchText: string = '';
+  filteredTasks: Task[] = [];
+  tasks: Task[] = [];
+
   task: Task = {
     id: 0,
     title: '',
-    description : '',
+    description: '',
     dueDate: new Date(),
     priority: Priority.MEDIUM,
     status: Status.NOT_STARTED
-  };  
+  };
 
-  categoryId ?:number;
-  
-  constructor(private taskService : TaskService,private route: ActivatedRoute){}
+  categoryId?: number;
+
+  constructor(
+    private taskService: TaskService,
+    private route: ActivatedRoute,
+    private searchService: SearchService
+  ) {}
 
   ngOnInit(): void {
-    // Récupérer le categoryId de l'URL et charger les tâches appropriées
     this.route.queryParams.subscribe(params => {
       if (params['categoryId']) {
         this.categoryId = Number(params['categoryId']);
         this.task.categoryId = this.categoryId;
-        this.loadTasks();
       }
+      this.loadTasks();
+    });
+
+    this.searchService.searchText$.subscribe(text => {
+      this.searchText = text;
+      this.filterTasks();
     });
   }
 
-  loadTasks() {
+  loadTasks(): void {
     if (this.categoryId) {
-      // Si on a un categoryId, on charge uniquement les tâches de cette catégorie
       this.tasks = this.taskService.getTaskByCategories(this.categoryId);
     } else {
-      // Sinon on charge toutes les tâches
       this.tasks = this.taskService.getTasks();
     }
-  }
-  loadTasksByCategory(categoryId : number) {
-    this.tasks = this.taskService.getTasks().filter(t => t.categoryId === categoryId);
+    this.filterTasks();
   }
 
-  saveTask():void{
-    if(this.task.id){
+  filterTasks(): void {
+    if (this.searchText.trim()) {
+      const lowerCaseSearchText = this.searchText.toLowerCase();
+      this.filteredTasks = this.tasks.filter(task =>
+        task.title.toLowerCase().includes(lowerCaseSearchText) ||
+        task.description.toLowerCase().includes(lowerCaseSearchText)
+      );
+    } else {
+      this.filteredTasks = [...this.tasks];
+    }
+  }
+
+  saveTask(): void {
+    if (this.task.id) {
       this.taskService.updateTask(this.task);
-    }else{
+    } else {
       this.taskService.addTask(this.task);
     }
     this.resetForm();
     this.loadTasks();
   }
 
-  deleteTask(id : number) : void{
-
+  deleteTask(id: number): void {
     if (confirm('Are you sure you want to delete this task?')) {
       this.taskService.deleteTask(id);
       this.loadTasks();
     }
   }
 
-  editTask(task :any ) {
-    this.task = { ...task }
+  editTask(task: any): void {
+    this.task = { ...task };
   }
 
-  resetForm() {
+  resetForm(): void {
     const currentCategoryId = this.task.categoryId;
     this.task = {
       id: 0,
@@ -78,7 +97,7 @@ export class TaskComponent {
       description: '',
       priority: Priority.MEDIUM,
       status: Status.NOT_STARTED,
-      categoryId : currentCategoryId
+      categoryId: currentCategoryId
     };
   }
 

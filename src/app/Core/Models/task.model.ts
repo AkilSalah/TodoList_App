@@ -12,8 +12,8 @@ export enum Status {
 
 export class Task {
     id: number = 0;
-    title?: string;
-    description?: string;
+    title: string = '';
+    description: string = '';
     dueDate?: Date;
     priority?: Priority;
     status?: Status;

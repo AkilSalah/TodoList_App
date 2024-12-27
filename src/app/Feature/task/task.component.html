@@ -83,7 +83,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let task of tasks" class="border-b border-gray-700">
+                  <tr *ngFor="let task of filteredTasks" class="border-b border-gray-700">
                     <td class="py-3 px-3 align-middle">{{task.title}} </td>
                     <td class="py-3 px-3 align-middle"> {{task.description}} </td>
                     <td class="py-3 px-3 align-middle"> {{task.dueDate}} </td>
