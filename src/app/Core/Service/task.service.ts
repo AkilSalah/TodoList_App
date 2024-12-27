@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../Models/task.model';
-import { data } from 'autoprefixer';
-import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +10,11 @@ export class TaskService {
 
   getTasks() : Task[]{
    return JSON.parse(localStorage.getItem(this.storageKey )|| '[]');
+  }
+
+  getTaskByCategories(categoryId : number) :Task[]{
+    const tasks = this.getTasks();
+    return tasks.filter(task => task.categoryId === categoryId)
   }
 
   saveTask(tasks: Task[] ) : void{
