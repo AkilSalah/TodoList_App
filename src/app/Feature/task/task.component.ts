@@ -13,6 +13,7 @@ export class TaskComponent implements OnInit {
   searchText: string = '';
   filteredTasks: Task[] = [];
   tasks: Task[] = [];
+  isModalOpen: boolean = false;
 
   task: Task = {
     id: 0,
@@ -46,6 +47,13 @@ export class TaskComponent implements OnInit {
     });
   }
 
+  toggleModal(): void {
+    this.isModalOpen = !this.isModalOpen;
+    if (!this.isModalOpen) {
+      this.resetForm();
+    }
+  }
+
   loadTasks(): void {
     if (this.categoryId) {
       this.tasks = this.taskService.getTaskByCategories(this.categoryId);
@@ -73,7 +81,7 @@ export class TaskComponent implements OnInit {
     } else {
       this.taskService.addTask(this.task);
     }
-    this.resetForm();
+    this.toggleModal();
     this.loadTasks();
   }
 
@@ -84,8 +92,9 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  editTask(task: any): void {
+  editTask(task: Task): void {
     this.task = { ...task };
+    this.toggleModal();
   }
 
   resetForm(): void {

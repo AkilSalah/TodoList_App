@@ -15,7 +15,7 @@ export class Task {
     title: string = '';
     description: string = '';
     dueDate?: Date;
-    priority?: Priority;
+    priority?: Priority ;
     status?: Status;
     categoryId?: number; 
 }

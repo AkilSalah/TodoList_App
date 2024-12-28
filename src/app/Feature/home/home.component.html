@@ -6,16 +6,16 @@
    
         <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-5">
           <div class="bg-white rounded-xl border px-7 py-8">
-            <p class="text-gray-400 text-base font-semibold mb-1">Tache terminer</p>
-            <h3 class="text-blue-600 text-3xl font-extrabold">$80K</h3>
+            <p class="text-gray-400 text-base font-semibold mb-1">Tasks completed</p>
+            <h3 class="text-blue-600 text-3xl font-extrabold">{{stats.completed}} </h3>
           </div>
           <div class="bg-white rounded-xl border px-7 py-8">
-            <p class="text-gray-400 text-base font-semibold mb-1">Tache a faire</p>
-            <h3 class="text-blue-600 text-3xl font-extrabold">100K</h3>
+            <p class="text-gray-400 text-base font-semibold mb-1">Tasks pending</p>
+            <h3 class="text-blue-600 text-3xl font-extrabold"> {{stats.pending}} </h3>
           </div>
           <div class="bg-white rounded-xl border px-7 py-8">
-            <p class="text-gray-400 text-base font-semibold mb-1">Tache en retard</p>
-            <h3 class="text-blue-600 text-3xl font-extrabold">99.9%</h3>
+            <p class="text-gray-400 text-base font-semibold mb-1">Tasks overdue</p>
+            <h3 class="text-blue-600 text-3xl font-extrabold"> {{stats.overdue}}</h3>
           </div>
         </div>
   </div>

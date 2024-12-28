@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../Models/task.model';
+import { Status, Task } from '../Models/task.model';
+import { Observable, of } from 'rxjs';
+import { data } from 'autoprefixer';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +45,31 @@ export class TaskService {
     const taskList = this.getTasks().filter(task => task.id !== id );
     this.saveTask(taskList);
   }
-
+  getTaskStat(): Observable<{
+    completed: number;
+    pending: number;
+    overdue: number;
+  }> {
+    const currentDate = new Date();
+    const tasks = this.getTasks();
+  
+    let completed = 0;
+    let pending = 0;
+    let overdue = 0;
+  
+    tasks.forEach(task => {
+      if (task.status === Status.COMPLETED) {
+        completed++;
+      } else if (task.status === Status.IN_PROGRESS || task.status === Status.NOT_STARTED) {
+        if (task.dueDate && new Date(task.dueDate) < currentDate) {
+          overdue++;
+        } else {
+          pending++;
+        }
+      }
+    });
+  
+    return of({ completed, pending, overdue });
+  }
+  
 }
