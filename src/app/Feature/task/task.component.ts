@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../../Core/Service/task.service';
 import { SearchService } from '../../Core/Service/search.service';
 import { Priority, Status, Task } from '../../Core/Models/task.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task',
@@ -82,6 +83,22 @@ export class TaskComponent implements OnInit {
   }
 
   saveTask(): void {
+    const currentDate = new Date();
+    
+    if (!this.task.dueDate) {
+      alert('Please select a valid date.');
+      return;
+    }
+    const dueDate = new Date(this.task.dueDate);
+
+    if (!this.task.title || !this.task.description || !this.task.dueDate ) {
+      alert('Tous les champs sont obligatoires.');
+      return;
+    }
+    if (dueDate < currentDate) {
+      alert('The date cannot be in the past');
+      return;
+    }
     if (this.task.id) {
       this.taskService.updateTask(this.task);
     } else {
