@@ -56,12 +56,18 @@ export class TaskComponent implements OnInit {
 
   loadTasks(): void {
     if (this.categoryId) {
-      this.tasks = this.taskService.getTaskByCategories(this.categoryId);
+      this.taskService.getTaskByCategories(this.categoryId).subscribe(tasks => {
+        this.tasks = tasks;
+        this.filterTasks();
+      });
     } else {
-      this.tasks = this.taskService.getTasks();
+      this.taskService.getTasks().subscribe(tasks => {
+        this.tasks = tasks;
+        this.filterTasks();
+      });
     }
-    this.filterTasks();
   }
+
 
   filterTasks(): void {
     if (this.searchText.trim()) {

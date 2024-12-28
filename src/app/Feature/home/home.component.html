@@ -1,7 +1,6 @@
 <div class="overflow-auto min-h-[88vh] max-lg-32 bg-gradient-to-b from-blue-900 via-blue-800 to-blue-500 px-6 sm:py-20 py-10 font-[sans-serif]">
     <div class="max-w-screen-xl mx-auto text-center text-white">
       <h1 class="text-5xl max-sm:text-3xl font-extrabold leading-tight mb-6">Welcome to Our Todo List Service</h1>
-      <p class="text-lg mb-12">Experience excellence like never before with our exclusive products and services.</p>
     </div>
    
         <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-5">
@@ -18,4 +17,13 @@
             <h3 class="text-blue-600 text-3xl font-extrabold"> {{stats.overdue}}</h3>
           </div>
         </div>
+
+        <div class="grid md:grid-cols-2 gap-5 mt-8">
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
+              <canvas id="priorityChart"></canvas>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-6">
+              <canvas id="statusChart"></canvas>
+          </div>
+      </div>
   </div>
