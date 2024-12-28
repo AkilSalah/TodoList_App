@@ -30,8 +30,13 @@ export class TaskComponent implements OnInit {
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private datePipe : DatePipe
   ) {}
+
+  formatDate(dueDate: string): string {
+    return this.datePipe.transform(dueDate, 'dd/MM/yyyy HH:mm')!;
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -84,7 +89,7 @@ export class TaskComponent implements OnInit {
 
   saveTask(): void {
     const currentDate = new Date();
-    
+
     if (!this.task.dueDate) {
       alert('Please select a valid date.');
       return;

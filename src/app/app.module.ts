@@ -8,6 +8,7 @@ import { CategoryComponent } from './Feature/category/category.component';
 import { HomeComponent } from './Feature/home/home.component';
 import { NavbarComponent } from './Feature/navbar/navbar.component';
 import { FormsModule} from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { FormsModule} from '@angular/forms';
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
