@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CategoryService } from '../../Core/Service/category.service';
 import { Category } from '../../Core/Models/category.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -9,6 +10,8 @@ import { Category } from '../../Core/Models/category.model';
 })
 export class CategoryComponent {
   
+  taskCounts: { [key: number]: number } = {}; 
+
   categories : Category[] = [];
   category: Category = {id:0 , name: '' };
   
@@ -16,6 +19,7 @@ export class CategoryComponent {
 
   ngOnInit() {
     this.loadCategories();
+    this.loadTaskNumbre();
   }
 
   loadCategories(){
@@ -34,6 +38,7 @@ export class CategoryComponent {
     }
     this.resetForm();
     this.loadCategories();
+    this.loadTaskNumbre();
   }
 
   deleteCategory(id : number | undefined){
@@ -41,6 +46,7 @@ export class CategoryComponent {
       if (confirm('Are you sure you want to delete this category?')) {
           this.categoryService.deleteCategory(id);
           this.loadCategories();
+          this.loadTaskNumbre();
       }
   }
   }
@@ -53,5 +59,12 @@ export class CategoryComponent {
     this.category = { id: 0, name: '' };
   }
 
+  loadTaskNumbre(){
+    this.categories.forEach(cate => {
+      this.categoryService.getTasksNumber(cate.id).subscribe(count =>{
+        this.taskCounts[cate.id] = count;
+      })
+    })
+  }
 
 }

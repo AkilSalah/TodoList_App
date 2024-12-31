@@ -45,6 +45,9 @@
                     <th class="py-2 px-3">
                       Category
                     </th>
+                    <th class="py-2 px-3">
+                      Tasks
+                    </th>
                     <th class="py-2 px-12">
                       Actions
                     </th>
@@ -56,6 +59,11 @@
                     *ngFor="let category of categories"
                   >
                     <td class="py-3 px-3 align-middle">{{ category.name }}</td>
+                    <td class="py-3">
+                      <span class="bg-green-400 text-white px-2 py-1 rounded text-sm">
+                        {{ taskCounts[category.id] || 0 }}
+                      </span>
+                    </td>
                     <td class="py-3 cursor-pointer px-3 flex flex-wrap items-center space-x-3">
                       <a
                         (click)="editCategory(category)"

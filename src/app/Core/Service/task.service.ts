@@ -41,6 +41,13 @@ export class TaskService {
     });
   }
 
+  deleteByCategories(categoryId : number):void{
+    this.getTasks().subscribe(taskList => {
+      const updatedList = taskList.filter(t => t.categoryId !== categoryId);
+      this.saveTask(updatedList);
+    }) 
+  }
+
   deleteTask(id: number): void {
     this.getTasks().subscribe(taskList => {
       const updatedTaskList = taskList.filter(task => task.id !== id);

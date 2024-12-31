@@ -88,31 +88,48 @@ export class TaskComponent implements OnInit {
   }
 
   saveTask(): void {
-    const currentDate = new Date();
-
-    if (!this.task.dueDate) {
-      alert('Please select a valid date.');
+    
+    const exitTitle = this.tasks.some(
+      (t) => t.title.toLowerCase() === this.task.title.toLowerCase() && t.id !== this.task.id
+    );
+    if (exitTitle) {
+      alert('Une tâche avec ce titre existe déjà. Veuillez utiliser un titre différent.');
       return;
     }
+  
+    const descriptionLength = this.task.description.length;
+    if (descriptionLength < 10 || descriptionLength > 100) {
+      alert('La description doit contenir entre 10 et 100 caractères.');
+      return;
+    }
+  
+    if (!this.task.dueDate) {
+      alert('Veuillez sélectionner une date valide.');
+      return;
+    }
+  
+    const currentDate = new Date();
     const dueDate = new Date(this.task.dueDate);
-
-    if (!this.task.title || !this.task.description || !this.task.dueDate ) {
+    if (dueDate < currentDate) {
+      alert('La date d\'échéance ne peut pas être dans le passé.');
+      return;
+    }
+  
+    if (!this.task.title || !this.task.description || !this.task.dueDate) {
       alert('Tous les champs sont obligatoires.');
       return;
     }
-    if (dueDate < currentDate) {
-      alert('The date cannot be in the past');
-      return;
-    }
+  
     if (this.task.id) {
       this.taskService.updateTask(this.task);
     } else {
       this.taskService.addTask(this.task);
     }
+  
     this.toggleModal();
     this.loadTasks();
   }
-
+  
   deleteTask(id: number): void {
     if (confirm('Are you sure you want to delete this task?')) {
       this.taskService.deleteTask(id);
